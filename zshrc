@@ -30,6 +30,11 @@ setopt magic_equal_subst
 
 setopt no_flow_control
 
+# coreutils(for Darwin)
+if [ "`uname`" = "Darwin" ]; then
+    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+fi
+
 # dircolors-solarized
 # https://github.com/seebi/dircolors-solarized
 eval `dircolors ~/.dir_colors/dircolors.256dark`
