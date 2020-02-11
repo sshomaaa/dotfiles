@@ -37,14 +37,22 @@ fi
 
 # dircolors-solarized
 # https://github.com/seebi/dircolors-solarized
-eval `dircolors ~/.dir_colors/dircolors.256dark`
+if [ ! -f ~/.dir_colors/dircolors-solarized/dircolors.256dark ]; then
+    mkdir -p ~/.dir_colors
+    ( cd ~/.dir_colors && git clone https://github.com/seebi/dircolors-solarized.git )
+fi
+eval `dircolors ~/.dir_colors/dircolors-solarized/dircolors.256dark`
 
-PROMPT='%F{240}[%D %*]%f %F{066}%n@%m%f %B%F{067}%~%f%b
+PROMPT='%F{247}[%D %*]%f %F{066}%n@%m%f %B%F{067}%~%f%b
 %{%(?.%F{028}.%F{124})%}%#%f '
 
 # zsh-syntax-highlighting
 # https://github.com/zsh-users/zsh-syntax-highlighting
-source ~/.zsh/zsh-syntax-highlighting.zsh
+if [ ! -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    mkdir -p ~/.zsh
+    ( cd ~/.zsh && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git )
+fi
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # git
 autoload -Uz vcs_info
