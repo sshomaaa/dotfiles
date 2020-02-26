@@ -82,6 +82,13 @@ if [ -d $HOME/.pyenv ]; then
     eval "$(pyenv init -)"
 fi
 
+# goenv
+if [ -d $HOME/.goenv ]; then
+    export GOENV_ROOT=$HOME/.goenv
+    export PATH=$GOENV_ROOT/bin:$PATH
+    eval "$(goenv init -)"
+fi
+
 # alias
 alias ls='ls --color=auto'
 alias l='ls'
