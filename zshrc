@@ -30,11 +30,6 @@ setopt magic_equal_subst
 
 setopt no_flow_control
 
-# coreutils(for Darwin)
-if [ "`uname`" = "Darwin" ]; then
-    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-fi
-
 # dircolors-solarized
 # https://github.com/seebi/dircolors-solarized
 if [ ! -f ~/.dir_colors/dircolors-solarized/dircolors.256dark ]; then
@@ -69,6 +64,47 @@ export EDITOR=vim
 
 # sudo completion
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+
+# homebrew paths(for Darwin)
+if [ "`uname`" = "Darwin" ]; then
+    # coreutils
+    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+
+    # findutils
+    export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+
+    # gnu-sed
+    export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+    # grep
+    export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+
+    # mysql-client
+    export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+    #export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
+    #export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
+    #export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
+
+    # ncurses
+    export PATH="/usr/local/opt/ncurses/bin:$PATH"
+    #export LDFLAGS="-L/usr/local/opt/ncurses/lib"
+    #export CPPFLAGS="-I/usr/local/opt/ncurses/include"
+    #export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig"
+
+    # readline
+    #export LDFLAGS="-L/usr/local/opt/readline/lib"
+    #export CPPFLAGS="-I/usr/local/opt/readline/include"
+    #export PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig"
+
+    # sqlite
+    export PATH="/usr/local/opt/sqlite/bin:$PATH"
+    #export LDFLAGS="-L/usr/local/opt/sqlite/lib"
+    #export CPPFLAGS="-I/usr/local/opt/sqlite/include"
+    #export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
+
+    # unzip
+    export PATH="/usr/local/opt/unzip/bin:$PATH"
+fi
 
 # nodebrew
 if [ -d $HOME/.nodebrew ]; then
