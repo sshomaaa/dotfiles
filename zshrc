@@ -106,6 +106,11 @@ if [ -d $HOME/.goenv ]; then
     eval "$(goenv init -)"
 fi
 
+# rbenv
+if [ -d $HOME/.rbenv ]; then
+    export PATH=$HOME/.rbenv/bin:$PATH
+fi
+
 # dircolors-solarized
 # https://github.com/seebi/dircolors-solarized
 if [ ! -f ~/.dir_colors/dircolors-solarized/dircolors.256dark ]; then
