@@ -108,7 +108,9 @@ fi
 
 # rbenv
 if [ -d $HOME/.rbenv ]; then
-    export PATH=$HOME/.rbenv/bin:$PATH
+    export RBENV_ROOT=$HOME/.rbenv
+    export PATH=$RBENV_ROOT/bin:$PATH
+    eval "$(rbenv init -)"
 fi
 
 # dircolors-solarized
