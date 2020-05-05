@@ -92,6 +92,11 @@ if [ -d $HOME/.nodebrew ]; then
     export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
 
+# yarn
+if [ -d $HOME/.yarn ]; then
+    export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
+fi
+
 # pyenv
 if [ -d $HOME/.pyenv ]; then
     export PYENV_ROOT=$HOME/.pyenv
