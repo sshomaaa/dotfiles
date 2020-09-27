@@ -48,6 +48,13 @@ if [ ! -d ~/.zprezto ]; then
 fi
 source ~/.zprezto/init.zsh
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+autoload -Uz promptinit
+promptinit
+prompt powerlevel10k
+
 export EDITOR=vim
 
 # sudo completion
@@ -58,6 +65,3 @@ alias ls='ls --color=auto'
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
