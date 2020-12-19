@@ -153,6 +153,10 @@ if [ -d ~/.plenv ]; then
     eval "$(plenv init - zsh)"
 fi
 
+if [ "$(uname -r | grep "microsoft")" != "" ]; then
+	export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+fi
+
 ##################################################
 # Paths
 ##################################################
