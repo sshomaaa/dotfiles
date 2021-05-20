@@ -1,7 +1,6 @@
 set nocompatible
 set background=dark
 colorscheme desert
-"colorscheme dracula
 syntax on
 set mouse-=a
 set backspace=indent,eol,start

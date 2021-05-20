@@ -1,6 +1,12 @@
-# My zshrc
-# require font.
+##
+## My zshrc
+##
+
+#
+### Require
+## Fonts
 # https://github.com/yuru7/HackGen/releases
+#
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -39,9 +45,17 @@ setopt magic_equal_subst
 setopt no_flow_control
 
 ##################################################
-# Plugins
+# Environment variable
 ##################################################
+if [ $(type nvim > /dev/null; echo $?) = 0 ]; then
+    export EDITOR=nvim
+elif [ $(type vim > /dev/null; echo $?) = 0 ]; then
+    export EDITOR=vim
+fi
 
+##################################################
+# Plugin
+##################################################
 # zplug
 # https://github.com/zplug/zplug
 ZPLUG_HOME=~/.zplug
@@ -95,15 +109,12 @@ if [ "$(which dircolors)" != "" ]; then
     eval `dircolors ~/.dircolors-solarized/dircolors.256dark`
 fi
 
-export EDITOR=vim
-
 # sudo completion
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
 ##################################################
 # Binary manager
 ##################################################
-
 # nodebrew
 if [ ! -d ~/.nodebrew ]; then
     if [ "$(which curl)" != "" -a "$(which perl)" != "" ]; then
@@ -158,9 +169,8 @@ if [ "$(uname -r | grep "microsoft")" != "" ]; then
 fi
 
 ##################################################
-# Paths
+# Path
 ##################################################
-
 # yarn
 # https://classic.yarnpkg.com/en/docs/install#debian-stable
 if [ -d ~/.yarn ]; then
@@ -168,9 +178,25 @@ if [ -d ~/.yarn ]; then
 fi
 
 ##################################################
+# WSL
+##################################################
+if [ "$(uname -r | grep "microsoft")" != "" ]; then
+    if [ "$(awk -F= '$1=="NAME" { print $2; }' /etc/os-release | xargs echo)" = "Ubuntu" ]; then
+        # DISPLAY
+        # With manually configuring resolv.conf
+        export DISPLAY=$(ip r | grep "default via" | awk '{print $3}'):0.0
+
+        # IM
+        export GTK_IM_MODULE=fcitx
+        export QT_IM_MODULE=fcitx
+        export XMODIFIERS=@im=fcitx
+        export DefaultIMModule=fcitx
+    fi
+fi
+
+##################################################
 # Alias
 ##################################################
-
 if [ "$(uname)" = "Darwin" ]; then
     alias ls='ls -G'
 else
