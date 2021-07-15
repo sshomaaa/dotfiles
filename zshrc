@@ -2,12 +2,6 @@
 ## My zshrc
 ##
 
-#
-### Require
-## Fonts
-# https://github.com/yuru7/HackGen/releases
-#
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -102,12 +96,12 @@ fi
 
 # dircolors-solarized
 # https://github.com/seebi/dircolors-solarized
-if [ "$(which dircolors)" != "" ]; then
-    if [ ! -d ~/.dircolors-solarized ]; then
-        ( git clone https://github.com/seebi/dircolors-solarized.git ~/.dircolors-solarized )
-    fi
-    eval `dircolors ~/.dircolors-solarized/dircolors.256dark`
-fi
+# if [ "$(which dircolors)" != "" ]; then
+#     if [ ! -d ~/.dircolors-solarized ]; then
+#         ( git clone https://github.com/seebi/dircolors-solarized.git ~/.dircolors-solarized )
+#     fi
+#     eval `dircolors ~/.dircolors-solarized/dircolors.256dark`
+# fi
 
 # sudo completion
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
@@ -116,56 +110,29 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/s
 # Binary manager
 ##################################################
 # nodebrew
-if [ ! -d ~/.nodebrew ]; then
-    if [ "$(which curl)" != "" -a "$(which perl)" != "" ]; then
-        ( curl -L git.io/nodebrew | perl - setup )
-    fi
-fi
-[[ -d ~/.nodebrew ]] && export PATH=~/.nodebrew/current/bin:$PATH
-
-# goenv
-if [ ! -d ~/.goenv ]; then
-    ( git clone https://github.com/syndbg/goenv.git ~/.goenv )
-fi
-if [ -d ~/.goenv ]; then
-    export GOENV_ROOT=~/.goenv
-    export PATH=$GOENV_ROOT/bin:$PATH
-    eval "$(goenv init -)"
+if [ -d $HOME/.nodebrew ]; then
+    export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
 # pyenv
-if [ ! -d ~/.pyenv ]; then
-    ( git clone https://github.com/pyenv/pyenv.git ~/.pyenv )
-fi
-if [ -d ~/.pyenv ]; then
-    export PYENV_ROOT=~/.pyenv
-    export PATH=$PYENV_ROOT/bin:$PATH
+if type "pyenv" >/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
 # rbenv
-if [ ! -d ~/.rbenv ]; then
-    ( git clone https://github.com/rbenv/rbenv.git ~/.rbenv )
+if [ -d $HOME/.rbenv ]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
 fi
-if [ -d ~/.rbenv ]; then
-    export RBENV_ROOT=~/.rbenv
-    export PATH=$RBENV_ROOT/bin:$PATH
-    eval "$(rbenv init -)"
+if type "rbenv" >/dev/null 2>&1; then
+    eval "$(rbenv init - zsh)"
 fi
 
 # plenv
-if [ ! -d ~/.plenv ]; then
-    ( git clone https://github.com/tokuhirom/plenv.git ~/.plenv )
-    ( git clone https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ )
+if [ -d $HOME/.plenv ]; then
+    export PATH="$HOME/.plenv/bin:$PATH"
 fi
-if [ -d ~/.plenv ]; then
-    export PLENV_ROOT=~/.plenv
-    export PATH=$PLENV_ROOT/bin:$PATH
+if type "plenv" >/dev/null 2>&1; then
     eval "$(plenv init - zsh)"
-fi
-
-if [ "$(uname -r | grep "microsoft")" != "" ]; then
-	export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 fi
 
 ##################################################
