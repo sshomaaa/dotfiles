@@ -151,7 +151,7 @@ if [ "$(uname -r | grep "microsoft")" != "" ]; then
     if [ "$(awk -F= '$1=="NAME" { print $2; }' /etc/os-release | xargs echo)" = "Ubuntu" ]; then
         # DISPLAY
         # With manually configuring resolv.conf
-        export DISPLAY=$(ip r | grep "default via" | awk '{print $3}'):0.0
+        export DISPLAY=$(ip r | grep "default via" | awk '{print $3}'):0
 
         # IM
         export GTK_IM_MODULE=fcitx
